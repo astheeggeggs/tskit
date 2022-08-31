@@ -15,7 +15,6 @@ REF_HET_OBS_HOM = 2
 
 MISSING = -1
 
-
 def mirror_coordinates(ts):
     """
     Returns a copy of the specified tree sequence in which all
@@ -754,7 +753,6 @@ class BackwardAlgorithm(LsHmmAlgorithm):
         query_is_missing,
     ):
         mu = self.mu[site_id]
-
         template_is_hom = np.logical_not(template_is_het)
 
         if query_is_missing:
