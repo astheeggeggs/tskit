@@ -15,6 +15,7 @@ REF_HET_OBS_HOM = 2
 
 MISSING = -1
 
+
 def mirror_coordinates(ts):
     """
     Returns a copy of the specified tree sequence in which all
@@ -316,8 +317,10 @@ class LsHmmAlgorithm:
                 st = T[T_index[edge.child]]
                 # Mark the lower ValueTransition as unused.
                 st.value_list = -1
+
                 # Also need to mark the corresponding InternalValueTransition as
                 # unused for the remaining states
+
                 for st2 in T:
                     if not (st2.value_list == tskit.NULL):
                         st2.value_list[T_index[edge.child]].value = -1
@@ -335,8 +338,10 @@ class LsHmmAlgorithm:
         for vt in T:
             if vt.tree_node != -1:
                 if parent[vt.tree_node] == -1 and vt.value_index != -2:
+
                     # Also need to mark the corresponding InternalValueTransition as
                     # unused for the remaining states
+
                     for st2 in T:
                         if not (st2.value_list == tskit.NULL):
                             st2.value_list[T_index[vt.tree_node]].value = -1
@@ -858,8 +863,6 @@ class LSBase:
         # Mixture of random and extremes
         rs = [np.zeros(m) + 0.999, np.zeros(m) + 1e-6, np.random.rand(m)]
         mus = [np.zeros(m) + 0.33, np.zeros(m) + 1e-6, np.random.rand(m) * 0.33]
-
-        e = self.genotype_emission(mu, m)
 
         for s, r, mu in itertools.product(genotypes, rs, mus):
             r[0] = 0
